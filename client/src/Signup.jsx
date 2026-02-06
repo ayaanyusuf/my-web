@@ -52,15 +52,15 @@ function Signup() {
         <div id="signup-form">
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit} id='form'>
-                <div>
+                <div className='holders'>
                     {/* <label htmlFor='username'>Username:</label> */}
                     <input type='text' placeholder='Username' name='username' id='username' required minLength={5} maxLength={12} value={data.username} onChange={handleChange} />
                 </div>
-                <div>
+                <div className='holders'>
                     {/* <label htmlFor='email'>Email:</label> */}
                     <input type='email' placeholder='Email' name='email' id='email' required value={data.email} onChange={handleChange} />
                 </div>
-                <div>
+                <div className='holders'>
                     {/* <label htmlFor='password'>Password:</label> */}
                     <input type='password' placeholder='Password' name='password' id='password' minLength={8} maxLength={15} required value={data.password} onChange={handleChange} />
                 </div>

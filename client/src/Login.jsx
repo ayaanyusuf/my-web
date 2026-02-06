@@ -48,11 +48,11 @@ function Login() {
         <div id="signup-form">
             <form onSubmit={handleSubmit}>
                 <h1>Login</h1>
-                <div>
+                <div className='holders'>
                 {/* <label htmlFor='email'>Email:</label> */}
                 <input type='email' placeholder='Email' name='email' id='email' required value={data.email} onChange={handleChange} />
                 </div>
-                <div>
+                <div className='holders'>
                 {/* <label htmlFor='password'>Password:</label> */}
                 <input type='password' placeholder='Password' name='password' id='password' minLength={8} maxLength={15} required value={data.password} onChange={handleChange} />
                 </div>

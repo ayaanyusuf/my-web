@@ -4,11 +4,49 @@
 
 #signup-form {
     height: 65%;
-    width: 25%;
+    width: 23%;
     border-radius: 15px;
     box-shadow: 1px 1px 10px 5px rgb(108, 108, 108);
     background-color: rgb(255, 255, 255);
     text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+    #signup-form {
+        width: 30%;
+        ;
+    }
+
+    #submit {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #signup-form {
+        width: 35%;
+        ;
+    }
+    #submit {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #signup-form {
+        width: 40%;
+        ;
+    }
+    #submit {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #signup-form {
+        width: 80%;
+        ;
+    }
 }
 
 form {
@@ -22,6 +60,7 @@ form {
 
 input {
     height: 25px;
+    width: 100%;
     font-size: medium;
     background-color: rgb(29, 28, 28);
     border-radius: 5px;
@@ -38,10 +77,9 @@ input:focus {
 }
 
 #submit {
-    width: 60px;
-    height: 30px;
+    width: 23%;
+    height: 7%;
     border: none;
-    width: 100px;
     border-radius: 6px;
     background-color: rgb(13, 190, 13);
     color: white;
@@ -127,4 +165,8 @@ h1 {
     height: 30px;
     font-weight: bold;
     cursor: url('http://www.rw-designer.com/cursor-extern.php?id=14474'), auto;
+}
+
+.holders {
+    width: 60%;
 }

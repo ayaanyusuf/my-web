@@ -39,7 +39,7 @@ function Signup() {
             setMessageClr('green');
             setLoading(true)
             setTimeout(() => {
-                navigate('/Login')
+                navigate('/login')
             }, 2500)
         }
         else {

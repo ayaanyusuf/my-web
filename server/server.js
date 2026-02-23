@@ -69,6 +69,18 @@ app.post('/login',async (req,res)=>{
     }
 })
 
+app.delete('/delete',async (req,res)=>{
+    const {name,email} = req.body;
+    const user = await User.deleteOne({email})
+    if(user){
+        res.json({
+            success:true,
+            message:'Your user is being deleted ...'
+        })
+    }
+
+})
+
 app.get('/signup', (req, res) => {
     res.send('POST YOUR REQUEST ON /users TO SIGN UP !!')
 })

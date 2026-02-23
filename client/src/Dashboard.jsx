@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Dashboard() {
     const [user, setUser] = useState(null);
-    const [darkmode, setDarkmode] = useState('');
     const [isloggedIn, setIsLoggedIn] = useState(true)
     const navigate = useNavigate()
     useEffect(() => {
@@ -17,7 +16,8 @@ function Dashboard() {
     return (
         <div id='dashboard'>
             {!isloggedIn && <img src="https://media.tenor.com/s-J6vqs61fkAAAAM/bye-pikachu.gif"></img>}
-            <h1>You are Logged In</h1>
+            {isloggedIn && <h1>You are Logged In</h1>}
+            {!isloggedIn && <h1>You are being Logged Out ...</h1>}
             {user &&
                 <h2>{user.email}</h2>}
             {user &&
@@ -27,11 +27,12 @@ function Dashboard() {
                 setIsLoggedIn(false)
                 setTimeout(() => {
                     navigate('/login')
-                },1500)
+                }, 1500)
 
             }}>
                 Logout
             </button>
+            <Link className="Link" to='/delete'>Delete User ?</Link>
         </div>
     )
 }

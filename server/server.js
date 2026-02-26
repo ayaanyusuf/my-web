@@ -16,13 +16,13 @@ app.use(express.json());
 
 app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password,10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const exsistingUser = await User.findOne({ email });
     if (exsistingUser) {
         res.json({
-            success:false,
-            message:'Email already in use'
+            success: false,
+            message: 'Email already in use'
         })
     }
     else {
@@ -33,51 +33,83 @@ app.post('/signup', async (req, res) => {
         });
         await user.save();
         res.json({
-            success:true,
-            message:'Your sign up was successful'
+            success: true,
+            message: 'Your sign up was successful'
         })
     }
 });
 
-app.post('/login',async (req,res)=>{
-    const {email,password}=req.body;
-    const user = await User.findOne({email});
-    if(!user){
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
         res.json({
-            success:false,
-            message:'No email found !'
+            success: false,
+            message: 'No email found !'
         })
     }
-    
-    const matchPassword = await bcrypt.compare(password,user.password);
 
-     if(!matchPassword){
+    const matchPassword = await bcrypt.compare(password, user.password);
+
+    if (!matchPassword) {
         res.json({
-            success:false,
-            message:'Wrong Password'
+            success: false,
+            message: 'Wrong Password'
         })
     }
-    else{
+    else {
         res.json({
-            success:true,
-            message:'You are being logged in...',
-            userinfo:{
-                name:user.username,
-                email:user.email
+            success: true,
+            message: 'You are being logged in...',
+            userinfo: {
+                name: user.username,
+                email: user.email,
+                id: user._id
             }
         })
     }
 })
 
-app.delete('/delete',async (req,res)=>{
-    const {name,email} = req.body;
-    const user = await User.deleteOne({email})
-    if(user){
+app.delete('/delete', async (req, res) => {
+    const { name, email } = req.body;
+    const user = await User.deleteOne({ email })
+    if (user) {
         res.json({
-            success:true,
-            message:'Your user is being deleted ...'
+            success: true,
+            message: 'Your user is being deleted ...'
         })
     }
+
+})
+
+app.post('/add-todos', async (req, res) => {
+    const { userid, task } = req.body;
+    const user = await User.findById(userid);
+    user.todos.push({ task });
+    await user.save()
+    res.json({
+        success: true,
+        todos: user.todos,
+    });
+})
+
+app.get('/todos/:userid', async (req, res) => {
+    const user = await User.findById(req.params.userid);
+    res.json({
+        success: true,
+        todos: user.todos
+    });
+})
+
+app.delete('/del-todos', async (req, res) => {
+    const { userid,taskId } = req.body;
+    const user = await User.findById(userid);
+    user.todos.pull({_id:taskId});
+    await user.save();
+    res.json({
+        success:true,
+        todos:user.todos
+    })
 
 })
 

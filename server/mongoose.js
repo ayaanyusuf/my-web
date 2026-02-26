@@ -5,7 +5,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/credentials')
 const signUpSchema = new mongoose.Schema({
     username:String,
     email:String,
-    password:String
+    password:String,
+    todos: [
+        {
+            task: String,
+        }
+    ]
 })
 const User = mongoose.model('User',signUpSchema);
 

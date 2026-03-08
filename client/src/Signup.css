@@ -2,6 +2,14 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #signup-form {
     height: 65%;
     width: 23%;
@@ -9,6 +17,7 @@
     box-shadow: 1px 1px 10px 5px rgb(108, 108, 108);
     background-color: rgb(255, 255, 255);
     text-align: center;
+
 }
 
 @media screen and (max-width: 1200px) {
@@ -27,6 +36,7 @@
         width: 35%;
         ;
     }
+
     #submit {
         width: 55%;
     }
@@ -37,6 +47,7 @@
         width: 40%;
         ;
     }
+
     #submit {
         width: 100%;
     }
@@ -78,7 +89,7 @@ input:focus {
 
 #submit {
     width: 23%;
-    height: 7%;
+    height: 29px;
     border: none;
     border-radius: 6px;
     background-color: rgb(13, 190, 13);
@@ -152,6 +163,11 @@ h1 {
 
 /* Dashboard */
 
+#dashboard {
+    width: 90%;
+    height: 100vh;
+}
+
 #username {
     color: red;
 }
@@ -169,4 +185,34 @@ h1 {
 
 .holders {
     width: 60%;
+}
+
+#todolist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#tasks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid grey;
+    list-style: none;
+    padding: 0 0 0 10px;
+    width: 100%;
+    background-color: white;
+}
+
+#completed {
+    width: 51%;
+    height: 29px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgb(0, 132, 255);
+    color: white;
+    font-weight: bold;
+    cursor: url('http://www.rw-designer.com/cursor-extern.php?id=14474'), auto;
 }

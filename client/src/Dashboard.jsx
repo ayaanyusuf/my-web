@@ -33,13 +33,13 @@ function Dashboard() {
                 body: JSON.stringify({
                     userid: user.id,
                     task: task,
+                    completed: false
                 })
 
             }
 
             );
             const data = await res.json();
-
             if (data.success) {
                 setTodos(data.todos);
                 setTask("");
@@ -64,6 +64,24 @@ function Dashboard() {
         }
     }
 
+    const updateTodo = async (id) => {
+        const res = await fetch("http://localhost:3000/update-todos", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userid: user.id,
+                todoId:id,
+                completed:true
+            })
+        });
+        const data = await res.json();
+        if (data.success) {
+            setTodos(data.todos);
+        }
+    }
+
 
     return (
         <div id='dashboard'>
@@ -74,19 +92,6 @@ function Dashboard() {
                 <h2>{user.email}</h2>}
             {user &&
                 <h2>Welcome <span id="username">{user.name}!</span></h2>}
-            <input
-                value={task}
-                onChange={(e) => setTask(e.target.value)}
-                placeholder="Add a task"
-            />
-
-            <input id="submit" type="submit" value='Add' onClick={addTodo} />
-
-            <ul>
-                {todos.map((todo) => (
-                    <li key={todo._id}>{todo.task} <button id="logout" onClick={() => { deleteTodo(todo._id) }}>Delete</button></li>
-                ))}
-            </ul>
             <button id="logout" onClick={() => {
                 localStorage.removeItem('userinfo');
                 setIsLoggedIn(false)
@@ -96,8 +101,32 @@ function Dashboard() {
 
             }}>
                 Logout
-            </button>
+            </button><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <Link className="Link" to='/delete'>Delete User ?</Link>
+            <hr /><br />
+            <div id="todolist">
+                <h2>Make a ToDo list</h2>
+                <span style={{ display: 'flex' }}>
+                    <input
+                        value={task}
+                        onChange={(e) => setTask(e.target.value)}
+                        placeholder="Add a task"
+                    />
+
+                    <input id="submit" type="submit" value='Add' onClick={addTodo} />
+                </span>
+
+                <ul style={{ padding: 0, width: '50%' }}>
+                    {todos.map((todo) => (
+                        <div key={todo._id} id="tasks" > <li style={{ fontWeight: 'bolder' }}>Task: <span style={{ color: '#006400',textDecoration: todo.completed && 'line-through #FF0000 2px' }}>{todo.task}</span> </li>
+                        <span>
+                        <button id="completed" onClick={() => { updateTodo(todo._id) }} >Completed?</button>&nbsp;
+                        <button id="logout" onClick={() => { deleteTodo(todo._id) }}>Delete</button>
+                        </span>
+                        </div>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }

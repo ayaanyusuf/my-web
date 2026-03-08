@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Signup() {
     const navigate = useNavigate();
-    const [signedIn,setSignedIn] = useState(false)
+    const [signedIn, setSignedIn] = useState(false)
     const [data, setData] = useState({
         username: '',
         email: '',
@@ -49,28 +49,31 @@ function Signup() {
     }
 
     return (
-        <div id="signup-form">
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit} id='form'>
-                <div className='holders'>
-                    {/* <label htmlFor='username'>Username:</label> */}
-                    <input type='text' placeholder='Username' name='username' id='username' required minLength={5} maxLength={12} value={data.username} onChange={handleChange} />
-                </div>
-                <div className='holders'>
-                    {/* <label htmlFor='email'>Email:</label> */}
-                    <input type='email' placeholder='Email' name='email' id='email' required value={data.email} onChange={handleChange} />
-                </div>
-                <div className='holders'>
-                    {/* <label htmlFor='password'>Password:</label> */}
-                    <input type='password' placeholder='Password' name='password' id='password' minLength={8} maxLength={15} required value={data.password} onChange={handleChange} />
-                </div>
-                <input type="submit" value="Register" id='submit' />
-                {message && <p style={{ color: messageClr }}>{message}{loading && <img id='loading' src='https://i0.wp.com/lordlibidan.com/wp-content/uploads/2019/03/Running-Pikachu-GIF.gif?fit=480%2C342&ssl=1'></img>}</p>}
-                {!signedIn &&<p style={{ margin: 0 }}>Already Signed Up ?</p>}
-                {!signedIn && <Link className='Link' to='/Login'>Log In</Link>}
+        <div id='page'>
 
-            </form>
+            <div id="signup-form">
+                <h1>Sign Up</h1>
+                <form onSubmit={handleSubmit} id='form'>
+                    <div className='holders'>
+                        {/* <label htmlFor='username'>Username:</label> */}
+                        <input type='text' placeholder='Username' name='username' id='username' required minLength={5} maxLength={12} value={data.username} onChange={handleChange} />
+                    </div>
+                    <div className='holders'>
+                        {/* <label htmlFor='email'>Email:</label> */}
+                        <input type='email' placeholder='Email' name='email' id='email' required value={data.email} onChange={handleChange} />
+                    </div>
+                    <div className='holders'>
+                        {/* <label htmlFor='password'>Password:</label> */}
+                        <input type='password' placeholder='Password' name='password' id='password' minLength={8} maxLength={15} required value={data.password} onChange={handleChange} />
+                    </div>
+                    <input type="submit" value="Register" id='submit' />
+                    {message && <p style={{ color: messageClr }}>{message}{loading && <img id='loading' src='https://i0.wp.com/lordlibidan.com/wp-content/uploads/2019/03/Running-Pikachu-GIF.gif?fit=480%2C342&ssl=1'></img>}</p>}
+                    {!signedIn && <p style={{ margin: 0 }}>Already Signed Up ?</p>}
+                    {!signedIn && <Link className='Link' to='/Login'>Log In</Link>}
 
+                </form>
+
+            </div>
         </div>
     )
 }

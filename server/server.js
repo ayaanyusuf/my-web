@@ -83,9 +83,9 @@ app.delete('/delete', async (req, res) => {
 })
 
 app.post('/add-todos', async (req, res) => {
-    const { userid, task } = req.body;
+    const { userid, task,completed } = req.body;
     const user = await User.findById(userid);
-    user.todos.push({ task });
+    user.todos.push({ task,completed });
     await user.save()
     res.json({
         success: true,
@@ -105,6 +105,24 @@ app.delete('/del-todos', async (req, res) => {
     const { userid,taskId } = req.body;
     const user = await User.findById(userid);
     user.todos.pull({_id:taskId});
+    await user.save();
+    res.json({
+        success:true,
+        todos:user.todos
+    })
+
+})
+
+app.patch('/update-todos', async (req, res) => {
+    const { userid,todoId,completed } = req.body;
+    const user = await User.findById(userid);
+    const task = user.todos.id(todoId);  //mongoose's way of finding sub documents
+    if(task.completed == true){
+        task.completed = false
+    }
+    else{
+        task.completed = true
+    }
     await user.save();
     res.json({
         success:true,

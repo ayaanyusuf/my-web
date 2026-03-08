@@ -9,6 +9,7 @@ const signUpSchema = new mongoose.Schema({
     todos: [
         {
             task: String,
+            completed: Boolean
         }
     ]
 })
